@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Include Firebase module -->
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap.css" rel="stylesheet">
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <img src="princetonshield.png" class = "shield">
+        <a class="navbar-brand" href="#">Princeton á la carte</a>
+      </div>     
+      <ul class="nav navbar-nav">
+        <li><a></a></li>   
+        <li class="active"><a href="#">Home</a></li>
+        <li><a></a></li>
+        <li><a href="mailto:ghassouna@gmail.com"> Email Us </a> </li>
+        <li><a></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> About </a>
+          <ul class="dropdown-menu">
+            <li><a href="http://www.princetonstartupcamp.com/">
+              <font size="3" color="black">
+                We are 6 Princeton students <br>
+                With a mission to bring  <br>
+                Liberty, Justice, and Great <br>
+                Food choices for all.  <br>
+                Welcome to "A la Carte!" <br>
+              </font>
+            </a></li>
+                   <!--
+                   <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  -->
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="jumbotron">
+          <div class="container">
+            <center>
+              <h1>Welcome to <i>À la Carte!</i></h1>
+              <p> Princeton's premier food selection service </p>
+            </center>
+            <!--<p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>-->
+          </div>
+        </div>
+
+        <div class="container">
+          <form class="form-signin" role="form">
+            <center><h2 class="form-signin-heading">Please sign in</h2>
+              <input type="text" id="emailText" placeholder="Email" class="form-control" required autofocus>
+              <input type="password" id="passText" placeholder="Password" class="form-control" required>
+              <button type="submit" class="btn btn-success" id="SignInButton">Sign In</button>
+              <button type="submit" class="btn btn-success" id="SignUpButton">Sign up</button>
+            </center>
+          </form>
+        </div>
+        <hr>
+
+        <footer>
+          <center><p>&copy; List of Collaborators</p></center>
+        </footer>
+      </div> 
+
+      <script>
+      <!-- Get a reference to the root of the chat data. -->
+      var messagesRef = new Firebase('https://burning-fire-8039.firebaseio.com/home');
+
+      $( "#SignInButton" ).click(function() {
+        var email = $('#emailText').val();
+        var pass = $('#passText').val();
+
+          // report error if account not created yet
+          messagesRef.child(email).once('value', function(snapshot) {
+            if (snapshot.val() === null) {
+              alert("Error: invalid account");
+              window.location.replace("index.html");
+            }
+            else if (pass.valueOf() !== snapshot.child('pass').val().valueOf())
+            {
+              alert("Error: incorrect password");
+              window.location.replace("index.html");
+            }
+
+          });
+
+
+          // create cookie keeping track of current user and password
+          document.cookie=email;
+
+          // clear name and food input fields for next input
+          $('#emailText').val('');
+          $('#passText').val('');
+
+          // go to home page
+          window.location.replace("home.html");
+        });
+
+      $( "#SignUpButton" ).click(function() {
+        var email = $('#emailText').val();
+        var pass = $('#passText').val();
+        var foods = $('');
+
+          // report error if account already created
+          // this is still buggy
+          messagesRef.child(email).once('value', function(snapshot) {
+            if (snapshot.child('foods').val() !== null) {
+              alert("Error: account already exists");
+              window.location.replace("index.html");
+            }
+            if (snapshot.child('foods').val() === null)
+            {
+              var myUser = messagesRef.child($('#emailText').val());
+              myUser.set({email: email, pass: pass, foods: foods});
+              alert("Account created.\nEmail is " + email + ", password is " + pass);
+              window.location.replace("index.html");
+            }
+          });
+
+          // clear name and food input fields for next input
+          $('#emailText').val('');
+          $('#passText').val('');
+
+
+
+          window.location.replace("index.html");
+        });
+</script>
+
+<script src="jquery-1.11.0.min"></script>
+<script src="bootstrap.js"></script>
+</body>
+</html>
+
