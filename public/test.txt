@@ -46,19 +46,7 @@ html {
 body {
   margin: 0;
 }
-img {
-  /* display:inline-block; */
-  vertical-align: middle;
-  position: absolute;
-  top: 0%;
-  left: 30px;
-  right 0%;
-  /* width: 3%; */
-  height: 100%;
-  z-index: 1;
-  /* opacity: 0.8; */
-  /* margin-right: 10px; */
-}
+
 a {
   background: transparent;
 }
@@ -306,8 +294,7 @@ table {
 *:after {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
-          
-  box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html {
@@ -316,8 +303,8 @@ html {
 }
 
 body {
-  font-family: Noteworthy, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
   background-color: #ffffff;
@@ -410,9 +397,9 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: Noteworthy, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Noteworthy", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
-  /* line-height: 1.1; */
+  line-height: 1.1;
   color: inherit;
 }
 
@@ -448,7 +435,7 @@ h6 .small,
 h1,
 h2,
 h3 {
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -805,7 +792,6 @@ pre code {
 .container:after {
   display: table;
   content: " ";
-  text-align: center;
 }
 
 .container:after {
@@ -816,7 +802,6 @@ pre code {
 .container:after {
   display: table;
   content: " ";
-  text-align: center;
 }
 
 .container:after {
@@ -838,8 +823,7 @@ pre code {
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
-  
-}
+  }
 }
 
 .row {
@@ -1946,13 +1930,12 @@ output {
 .form-control {
   display: block;
   width: 50%;
-  height: 60px;
+  height: 34px;
   padding: 6px 12px;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.428571429;
   color: #555555;
   vertical-align: middle;
-  margin: 12px;
   background-color: #ffffff;
   background-image: none;
   border: 1px solid #cccccc;
@@ -2193,7 +2176,7 @@ textarea.input-lg {
 @media (min-width: 768px) {
   .form-inline .form-group {
     display: inline-block;
-    margin-bottom: 10;
+    margin-bottom: 0;
     vertical-align: middle;
   }
   .form-inline .form-control {
@@ -2206,8 +2189,8 @@ textarea.input-lg {
   .form-inline .checkbox {
     display: inline-block;
     padding-left: 0;
-    margin-top: 10;
-    margin-bottom: 10;
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .form-inline .radio input[type="radio"],
   .form-inline .checkbox input[type="checkbox"] {
@@ -2268,10 +2251,9 @@ textarea.input-lg {
 
 .btn {
   display: inline-block;
-  padding: 1% 10%;
+  padding: 6px 12px;
   margin-bottom: 0;
-  font-size: 16px;
-  margin-left: 12px;
+  font-size: 14px;
   font-weight: normal;
   line-height: 1.428571429;
   text-align: center;
@@ -2504,8 +2486,8 @@ fieldset[disabled] .btn-danger.active {
 }
 
 .btn-success {
-  color: #090000;
-  background-color: #C8E9DC;
+  color: #ffffff;
+  background-color: #5cb85c;
   border-color: #4cae4c;
 }
 
@@ -3923,8 +3905,7 @@ input[type="button"].btn-block {
 }
 
 .input-group {
-  position: absolute;
-  text-align:middle;
+  position: relative;
   display: table;
   border-collapse: separate;
 }
@@ -3944,7 +3925,7 @@ input[type="button"].btn-block {
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn {
   height: 46px;
-  padding: 1% 20%;
+  padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
@@ -4341,8 +4322,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 50px;
-  border: 1px solid rgba(0, 0, 0, 0);
+  margin-bottom: 20px;
+  border: 1px solid transparent;
 }
 
 .navbar:before,
@@ -4508,9 +4489,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   padding: 15px 15px;
-  font-size: 34px;
+  font-size: 18px;
   line-height: 20px;
-  font-family: -webkit-body;
 }
 
 .navbar-brand:hover,
@@ -4520,7 +4500,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand {
-    margin-left: auto;
+    margin-left: -15px;
   }
 }
 
@@ -4821,13 +4801,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  border-top-color: #080808;
-  background-color: #0F5C66;
+  background-color: #222222;
   border-color: #080808;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #A9DFDA;
+  color: #999999;
 }
 
 .navbar-inverse .navbar-brand:hover,
@@ -4841,7 +4820,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color: #EFF8F5;
+  color: #999999;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,
@@ -4853,7 +4832,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
-  color: #39D6A3;
+  color: #ffffff;
   background-color: #080808;
 }
 
@@ -5244,15 +5223,11 @@ a.list-group-item.active > .badge,
 .jumbotron {
   padding: 30px;
   margin-bottom: 30px;
-  margin-top: 50px;
-  font-family: inh;
-  font-size: 26px;
+  font-size: 21px;
   font-weight: 200;
   line-height: 2.1428571435;
-  color: Black;
-  background-color: #C8E9DC;
-  opacity: 0.7;
-  min-height: 100px;
+  color: greenyellow;
+  background-color: #C74C4C;
 }
 
 .jumbotron h1,
@@ -5285,9 +5260,7 @@ a.list-group-item.active > .badge,
   .jumbotron h1,
   .jumbotron .h1 {
     font-size: 63px;
-  
-    font-family: serif;
-}
+  }
 }
 
 .thumbnail {
