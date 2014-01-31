@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Include Firebase module -->
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap2.css" rel="stylesheet">
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <img src="princetonshield.png" class="shield" />
+        <a class="navbar-brand" href="#">Food Preferences</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <div class="navbar-form navbar-right" role="form">
+          <button type="submit" class="btn btn-success" id="signOutButton">Sign out</button>
+        </div>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </div>
+
+  <div class="jumbotron">
+    <div class="container">
+      <h1><b>My Menu</b></h1>
+      <!--<p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>-->
+      <h2>
+        <form id="foodForm" action="">
+          <input type="checkbox" name="food" value="chicken">Chicken<br>
+          <input type="checkbox" name="food" value="chicken pot pie">    Chicken Pot Pie<br>
+          <input type="checkbox" name="food" value="pasta">Pasta<br>
+          <input type="checkbox" name="food" value="beef">Beef<br>
+          <input type="checkbox" name="food" value="veggies">Veggies<br>
+          <input type="checkbox" name="food" value="seafood">Seafood<br> 
+        </form>
+      </h2>
+      <center> <button type="submit" class="btn btn-success" id="foodButton">Update Foods</button> </center>
+    </div>
+  </div>
+  <hr>
+
+  <footer>
+    <p>&copy; List of Collaborators</p>
+  </footer>
+</div> 
+
+<div id="textDiv"></div>
+
+<script>
+      // Get a reference to the root of the chat data. 
+      var messagesRef = new Firebase('https://burning-fire-8039.firebaseio.com/home');
+
+      var email = document.cookie;
+      var pass;
+      var foods;
+
+      messagesRef.child(email).once('value', function(snapshot) {
+        pass = snapshot.child('pass').val();
+        foods = snapshot.child('foods').val();
+
+              // mark check boxes to reflect most recent food preferences made
+              var boxes = document.getElementById('foodForm').getElementsByTagName('input');
+
+              for (var n = 0; n < boxes.length; n++) {
+                if (boxes[n].type == 'checkbox') {
+          // check box if food item is in user's food list
+          var val = boxes[n].value;
+          if (foods.indexOf(val) !== -1) {
+            boxes[n].checked = true;
+          }
+        }
+      }
+    });
+
+
+      $( "#foodButton" ).click(function() {
+
+        // Add checked foods to food list
+        var foodList = '';
+        var c = document.getElementById('foodForm').getElementsByTagName('input');
+        for (var i = 0; i < c.length; i++ ) {
+          if (c[i].type == 'checkbox') {
+            if (c[i].checked == true) {
+              if (i < c.length - 1) foodList += c[i].value + ', ';
+              else foodList += c[i].value;
+            }
+            else foodList += '';
+          }
+        }
+        /*
+        alert("foodlist is " + foodList);
+        alert("email is " + email);
+        */
+        
+        var myUser = messagesRef.child(email);
+        myUser.set({email: email, pass: pass, foods: foodList});
+
+
+        alert("your favorite foods are: " + foodList);
+      });
+
+
+      $( "#signOutButton" ).click(function() {
+          //delete cookie and sign out
+          alert("Goodbye, " + email);
+          document.cookie = document.cookie + "; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+          window.location.replace("index.html");
+        });
+
+      /*$( "#signOutButton" ).click(function() {
+          var myUser = messagesRef.child($('#emailText').val());
+          //delete cookie and sign out
+          alert("cookie is " + document.cookie);
+          document.cookie = document.cookie + "; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+          window.location.replace("index.html");
+        });*/
+
+</script>
+
+<script src="jquery-1.11.0.min"></script>
+<script src="bootstrap.js"></script>
+</body>
+</html>
+
